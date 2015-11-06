@@ -10,8 +10,16 @@ var path = require('path'),
 
 var common = {
   entry: APP_PATH,
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   module: {
     loaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel'],
+        include: APP_PATH
+      },
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
