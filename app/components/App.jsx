@@ -5,6 +5,7 @@ import Notes from './Notes.jsx';
 export default class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       notes: [
         {
@@ -25,10 +26,16 @@ export default class App extends Component {
 
   render() {
     const notes = this.state.notes;
+
     return (
       <div>
+        <button className="add-note" onClick={this.addNote}>+</button>
         <Notes items={notes} />
       </div>
     );
+  }
+
+  addNote() {
+    console.log('add note');
   }
 }

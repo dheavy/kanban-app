@@ -1,7 +1,7 @@
-import React, {Components} from 'react';
+import React, {Component} from 'react';
 import Note from './Note.jsx';
 
-export default class Notes extends Components {
+export default class Notes extends Component {
   render() {
     const notes = this.props.items;
     return (
