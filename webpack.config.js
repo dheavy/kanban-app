@@ -8,6 +8,8 @@ var path = require('path'),
     APP_PATH = path.resolve(ROOT_PATH, 'app'),
     BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 
+process.env.BABEL_ENV = TARGET;
+
 var common = {
   entry: APP_PATH,
   resolve: {
