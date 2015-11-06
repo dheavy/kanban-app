@@ -6,6 +6,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
+    this.addNote = this.addNote.bind(this);
+
     this.state = {
       notes: [
         {
@@ -36,6 +38,11 @@ export default class App extends Component {
   }
 
   addNote() {
-    console.log('add note');
+    this.setState({
+      notes: this.state.notes.concat([{
+        id: uuid.v4(),
+        task: 'New task'
+      }])
+    });
   }
 }
