@@ -27,7 +27,7 @@ export default class Note extends Component {
 
   renderEdit() {
     return (
-      <input type="type"
+      <input type="text"
              autoFocus={true}
              defaultValue={this.props.task}
              onBlur={this.finishEdit}
