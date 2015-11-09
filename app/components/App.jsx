@@ -10,6 +10,10 @@ export default class App extends Component {
     return (
       <div>
         <button className="add-note" onClick={this.addNote}>+</button>
+
+        // The AltContainer allows us to bind data to its immediate
+        // children. In this case it injects the `items` property into
+        // `Notes`.
         <AltContainer stores={[NoteStore]} inject={{
           items: () => NoteStore.getState().notes
         }}>
