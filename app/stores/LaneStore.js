@@ -17,6 +17,62 @@ class LaneStore {
       lanes: lanes.concat(lane)
     })
   }
+
+  attachToLane({laneId, noteId}) {
+    if (!noteId) {
+      this.waitFor(NoteStore);
+      noteId = NoteStore.getState().notes.slice(-1)[0].id;
+    }
+
+    const lanes = this.lanes,
+          targetId = this.findLane(laneId);
+
+    if (targetId) {
+      return;
+    }
+
+    const lane = lanes[targetId];
+
+    if (lane.notes.indexOf(noteId) === -1) {
+      lane.notes.push(noteId);
+      this.setState({lanes});
+    } else {
+      console.warn('Already attached note to lane', lanes);
+    }
+  }
+
+  detachFromLane({laneId, noteId}) {
+    const lanes = this.lanes,
+          targetId = this.findLane(laneId);
+
+    if (targetId < 0) {
+      return;
+    }
+
+    const lane = lanes[targetId],
+          notes = lane.notes,
+          removeIndex = notes.indexOf(noteId);
+
+    if (removeIndex !== -1) {
+      lane.notes = notes.slice(0, removeIndex)
+                        .concat(notes.slice(removeIndex + 1));
+
+      this.setState({lanes});
+    } else {
+      console.warn('Failed to remove note from a lane as it didn\'t exist.');
+    }
+  }
+
+  findLane(id) {
+    const lanes = this.lanes,
+          laneIndex = lanes.findIndex((lane) => lane.id === id);
+
+    if (laneIndex < 0) {
+      console.warn('Failed to find lane', lanes, id);
+    }
+
+    return laneIndex;
+  }
 }
 
 export default alt.createStore(LaneStore, 'LaneStore');

@@ -14,9 +14,9 @@ export default class App extends Component {
         <AltContainer
           stores={[LaneStore]}
           inject={{
-            items: () => LaneStore.getState().notes
+            items: () => LaneStore.getState().lanes || []
           }}>
-          <Lanes onEdit={this.editLane} onDelete={this.deleteLane} />
+          <Lanes />
         </AltContainer>
       </div>
     );
@@ -25,4 +25,4 @@ export default class App extends Component {
   addItem() {
     LaneActions.create({task: 'New lane'});
   }
-}
+};
